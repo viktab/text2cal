@@ -6,7 +6,7 @@
   "scripts": {
     "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5000",
     "start": "nodemon --ignore client/",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider; webpack"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
