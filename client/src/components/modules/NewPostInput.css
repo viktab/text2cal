@@ -29,6 +29,11 @@
   transition: box-shadow 0.1s;
 }
 
+.instructions {
+  padding-top: 32px;
+  font-size: 14px;
+}
+
 .NewPostInput-button {
   color: var(--primary);
   border: var(--primary) 1px solid;

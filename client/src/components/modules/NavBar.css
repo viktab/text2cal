@@ -1,6 +1,9 @@
 .NavBar-container {
   padding: var(--s) var(--m);
   background-color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .NavBar-title {

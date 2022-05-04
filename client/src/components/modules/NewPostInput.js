@@ -51,8 +51,16 @@ class NewPostInput extends Component {
           value="Submit"
           onClick={this.handleSubmit}
         >
-          Generate Events
+          Generate Calendar
         </button>
+        <div className="instructions">
+          Instructions: <br/>
+          - enter the event name (aka the song name) in the first textbox <br/>
+          - copy and paste the schedule into the second textbox (each line should be one practice) <br/>
+          - click Download Calendar to download an ics file to your computer <br/>
+          - on Google Calendar: Click on the gear in the top right, then go to Settings. Go to the import/export option on the left, import the file, and choose which Calendar you want to add it to (this is useful if you want different colors for different dances - you can make a new Calendar and change its color.) <br/>
+          - for your computer's built-in calendar app: double click on the file, choose the calendar you want to add it to, and click ok. <br/>
+        </div>
       </div>
     );
   }
