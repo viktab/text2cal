@@ -18,6 +18,17 @@
   box-shadow: 0 0 0 var(--xs) rgba(0, 123, 255, 0.25);
 }
 
+.name-input {
+  width: 40%;
+  font-family: "Open Sans";
+  font-size: 14px;
+  padding: var(--s) var(--m);
+  flex-grow: 1;
+  border: var(--darkgrey) 1px solid;
+  border-radius: var(--xs) 0 0 var(--xs);
+  transition: box-shadow 0.1s;
+}
+
 .NewPostInput-button {
   color: var(--primary);
   border: var(--primary) 1px solid;

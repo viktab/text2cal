@@ -66,6 +66,20 @@ class NewPostInput extends Component {
  */
 class NewStory extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      eventName: "",
+    };
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      eventName: event.target.value,
+    });
+  };
+
   uuid = () => {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -80,11 +94,9 @@ class NewStory extends Component {
               "CALSCALE:GREGORIAN\n" +
               "METHOD:PUBLISH\n";
     var lines = input.split("\n");
-    var name = lines[0];
+    var name = this.state.eventName;
     for (var i in lines) {
-      if (i != 0) {
-        ics += this.createEvent(lines[i], name);
-      }
+      ics += this.createEvent(lines[i], name);
     }
     return ics + "END:VCALENDAR";
   }
@@ -175,6 +187,9 @@ class NewStory extends Component {
     if (month == -1) {
       month = parseInt(localDate.getMonth()) + 1;
     }
+    if (input.toLowerCase().includes("filming")) {
+      name += " filming";
+    }
     var event = "BEGIN:VEVENT\n";
     event += "SUMMARY:" + name + "\n";
     event += "UID:" + this.uuid() + "\n";
@@ -224,15 +239,18 @@ class NewStory extends Component {
       if (split.length != 2) {
         return [-1, -1];
       }
-      hour = parseInt(split[0].replace(/\D/g,'')) + addHour;
+      hour = parseInt(split[0].replace(/\D/g,''));
       min = parseInt(split[1].replace(/\D/g,''));
     }
     else {
       // TODO: handle weird case of 600 or 1100
-      hour = parseInt(input.replace(/\D/g,'')) + addHour;
+      hour = parseInt(input.replace(/\D/g,''));
       min = 0;
     }
-    return [hour, min];
+    if (hour == 12) {
+      addHour = Math.abs(12-addHour);
+    }
+    return [hour + addHour, min];
   }
 
   addStory = (value) => {
@@ -251,7 +269,21 @@ class NewStory extends Component {
   };
 
   render() {
-    return <NewPostInput defaultText="Enter your schedule here" onSubmit={this.addStory} />;
+    return (
+      <div> 
+        <input
+          type="text"
+          placeholder="Event name"
+          value={this.state.value}
+          onChange={this.handleChange}
+          className="name-input"
+        />
+        <NewPostInput 
+          defaultText="Enter your schedule here" 
+          onSubmit={this.addStory} 
+        />
+      </div>
+      );
   }
 }
 
